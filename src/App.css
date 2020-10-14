@@ -4,9 +4,10 @@
   border-color: black;
   border-bottom-style: solid;
 }
-.main{
-  padding-left: 10rem;
+.board{
+  padding: 5rem 10rem 5rem 10rem ;
 }
+
 .board-box{
   width: 4rem;
   height: 4rem;
