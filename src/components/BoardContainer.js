@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import BoardForm from './BoardForm'
+import BoardBox from './BoardBox'
 
 export default class BoardContainer extends Component {
 
@@ -8,8 +9,8 @@ export default class BoardContainer extends Component {
         columns: 0,
         formShown: true,
         boardSet: true,
+        boardArr: [],
     }
-    boardArr = [];
 
     handleChange = event => {
         const { name, value } = event.target
@@ -18,9 +19,34 @@ export default class BoardContainer extends Component {
 
     handleSubmit = event => {
         this.setState({boardSet: true})
+        this.createBoardArr()
+        this.drawBoard()
         event.preventDefault()
     }
 
+    createBoardArr = () => {
+        const boardArr = []
+        for ( let i=0; i<this.state.rows; i++ ){
+            let columns = [];
+            columns.length = this.state.columns
+            boardArr.push(columns)
+        }
+        this.setState({boardArr: boardArr}) 
+    }
+
+    selectBoardSpot = (x, y) => {
+        if (x > this.state.rows.length && y > this.state.columns.length){
+            return this.setState({
+                boardArr: [...this.state.boardArr, (this.state.boardArr[x][y] = <BoardBox />)], 
+            })
+        }
+
+    }
+
+    drawBoard = () => {
+        
+    }
+    
     render() {
         return (
             <div>
@@ -30,6 +56,7 @@ export default class BoardContainer extends Component {
                     handleChange={this.handleChange} 
                     handleSubmit={this.handleSubmit} 
                 />
+                {this.drawBoard()}
                 <div className="board">
                     <div className="board-box"></div> 
                 </div>
