@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function BoardBox() {
+export default function BoardBox({id}) {
     return (
-        <div className="board">
-            <div className="board-box"></div> 
+        <div>
+            <div className="board-box" id={id} ></div> 
         </div>
     )
 }

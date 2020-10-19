@@ -6,6 +6,12 @@
 }
 .board{
   padding: 5rem 10rem 5rem 10rem ;
+  display: flex;
+  flex-direction: column;
+}
+.board-row{
+  display: flex;
+  flex-direction: row;
 }
 
 .board-box{

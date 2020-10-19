@@ -5,8 +5,8 @@ import BoardBox from './BoardBox'
 export default class BoardContainer extends Component {
 
     state = {
-        rows: 0,
         columns: 0,
+        rows: 0,
         formShown: true,
         boardSet: true,
         boardArr: [],
@@ -18,18 +18,21 @@ export default class BoardContainer extends Component {
     }
 
     handleSubmit = event => {
+        event.preventDefault()
         this.setState({boardSet: true})
         this.createBoardArr()
-        this.drawBoard()
-        event.preventDefault()
+        // this.drawBoard()
     }
 
     createBoardArr = () => {
-        const boardArr = []
-        for ( let i=0; i<this.state.rows; i++ ){
-            let columns = [];
-            columns.length = this.state.columns
-            boardArr.push(columns)
+        const boardArr = [];
+        for ( let i=0; i<this.state.columns; i++ ){
+            let rows = [];
+            rows.length = this.state.rows;
+            for ( let y = 0; y<this.state.rows; y++){
+                rows[y] = <BoardBox id={y} />
+            }
+            boardArr.push(rows)
         }
         this.setState({boardArr: boardArr}) 
     }
@@ -40,14 +43,26 @@ export default class BoardContainer extends Component {
                 boardArr: [...this.state.boardArr, (this.state.boardArr[x][y] = <BoardBox />)], 
             })
         }
-
     }
 
     drawBoard = () => {
-        
+        return this.state.boardArr.map(x => {
+            return (
+                <div className="board-row">
+                    {x.map( y => {
+                        return(
+                            <div className="board-column">{
+                                <BoardBox />
+                            }</div>
+                        )
+                    })}
+                </div>
+            )
+        })
     }
     
     render() {
+        // this.createBoardArr
         return (
             <div>
                 <BoardForm 
@@ -56,9 +71,10 @@ export default class BoardContainer extends Component {
                     handleChange={this.handleChange} 
                     handleSubmit={this.handleSubmit} 
                 />
-                {this.drawBoard()}
+                
                 <div className="board">
-                    <div className="board-box"></div> 
+                    {this.drawBoard()}
+                    {/* <button onClick={this.drawBoard}></button> */}
                 </div>
   
             </div>
