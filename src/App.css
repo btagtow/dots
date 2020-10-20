@@ -1,8 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Krona+One&display=swap');
+
 .header{
   text-align: center;
   font-size: 3rem;
   border-color: black;
   border-bottom-style: solid;
+  font-family: 'Krona One', sans-serif;
 }
 .board{
   padding: 5rem 10rem 5rem 10rem ;

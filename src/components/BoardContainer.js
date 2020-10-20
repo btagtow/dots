@@ -26,13 +26,15 @@ export default class BoardContainer extends Component {
 
     createBoardArr = () => {
         const boardArr = [];
+        let row=0;
         for ( let i=0; i<this.state.columns; i++ ){
             let rows = [];
             rows.length = this.state.rows;
             for ( let y = 0; y<this.state.rows; y++){
-                rows[y] = <BoardBox id={y} />
+                rows[y] = row
             }
             boardArr.push(rows)
+            row++
         }
         this.setState({boardArr: boardArr}) 
     }
@@ -45,14 +47,27 @@ export default class BoardContainer extends Component {
         }
     }
 
+    addBoardSpot = (xCoordinate, yCoordinate) => {
+        return <BoardBox row={xCoordinate} column={yCoordinate}/>
+    }
+
+    // drawBoard = () => {
+    //     for (let x=0; x<this.state.boardArr.length; x++){
+    //         for (let y=0; y<this.state.boardArr[0].length; y++){
+    //             <BoardBox />
+    //         }
+    //     }       
+    // }
+
     drawBoard = () => {
         return this.state.boardArr.map(x => {
             return (
-                <div className="board-row">
+                <div className={`board-row`}>
                     {x.map( y => {
+                        console.log(y)
                         return(
                             <div className="board-column">{
-                                <BoardBox />
+                                <BoardBox y={y}/>
                             }</div>
                         )
                     })}
@@ -60,7 +75,7 @@ export default class BoardContainer extends Component {
             )
         })
     }
-    
+    // ^^DRAWS BOARD
     render() {
         // this.createBoardArr
         return (
