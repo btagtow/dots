@@ -20,6 +20,7 @@
 .board-box{
   width: 4rem;
   height: 4rem;
-  border-color: black;
+  border-color: red;
   border-style: solid;
 }
+
